@@ -17,6 +17,8 @@ CLASS ZCL_365_DATA_GEN_RAP IMPLEMENTATION.
 
   method if_oo_adt_classrun~main.
 
+
+" NEW CHANGE on my Code
     out->write( 'Adding Travel data' ).
 
     delete from z365_travel_a.
