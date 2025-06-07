@@ -8,17 +8,16 @@ class zcl_365_data_gen_rap definition
     interfaces if_oo_adt_classrun .
   protected section.
   private section.
-ENDCLASS.
+endclass.
 
 
 
-CLASS ZCL_365_DATA_GEN_RAP IMPLEMENTATION.
+class zcl_365_data_gen_rap implementation.
 
 
   method if_oo_adt_classrun~main.
 
-
-" NEW CHANGE on my Code
+    " NEW CHANGE on my Code
     out->write( 'Adding Travel data' ).
 
     delete from z365_travel_a.
@@ -97,4 +96,4 @@ CLASS ZCL_365_DATA_GEN_RAP IMPLEMENTATION.
     ).
 
   endmethod.
-ENDCLASS.
+endclass.

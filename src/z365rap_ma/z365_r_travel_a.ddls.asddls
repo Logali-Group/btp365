@@ -3,7 +3,8 @@
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity Z365_r_TRAVEL_A
   as select from z365_travel_a
-  //composition of target_data_source_name as _association_name
+
+  composition [0..*] of Z365_r_BOOKING_A         as _Booking
 
   association [0..1] to /DMO/I_Agency            as _Agency        on $projection.AgencyID = _Agency.AgencyID
   association [0..1] to /DMO/I_Customer          as _Customer      on $projection.CustomerID = _Customer.CustomerID
@@ -41,10 +42,11 @@ define root view entity Z365_r_TRAVEL_A
       //total ETag field
       @Semantics.systemDateTime.lastChangedAt: true
       last_changed_at       as LastChangedAt,
-      
+
       // Make association public
       _Agency,
       _Customer,
       _OverallStatus,
-      _Currency
+      _Currency,
+      _Booking
 }

@@ -1,0 +1,63 @@
+managed;
+strict ( 2 );
+//with draft;
+
+define behavior for Z365_r_TRAVEL_A alias Travel
+implementation in class zbp_365_r_travel_a unique
+persistent table z365_travel_a
+//draft table
+lock master
+authorization master ( instance, global )
+etag master LocalLastChangedAt
+{
+  create ( precheck );
+  update ( precheck );
+  delete;
+  association _Booking { create ( features : instance, authorization : update ); }
+
+
+  field ( numbering : managed, readonly ) TravelUUID;
+
+  field ( readonly ) TravelID, OverallStatus, TotalPrice, LocalCreatedAt, LocalCreatedBy, LocalLastChangedAt, LocalLastChangedBy;
+
+  field ( mandatory ) CustomerID, CurrencyCode, AgencyID, BeginDate, EndDate;
+
+  field ( features : instance ) BookingFee;
+
+}
+
+define behavior for Z365_r_BOOKING_A alias Booking
+implementation in class zbp_365_r_booking_a unique
+persistent table z365_booking_a
+lock dependent by _Travel
+authorization dependent by _Travel
+//etag master <field_name>
+{
+  update;
+  delete;
+  association _BookingSupplement { create; }
+
+  association _Travel;
+
+  field ( numbering : managed, readonly ) BookingUUID;
+
+  field ( readonly ) TavelUUID;
+}
+
+define behavior for Z365_r_BKSUPPL_A alias BookingSupplement
+implementation in class zbp_365_r_booksuppl_a unique
+persistent table z365_bksuppl_a
+lock dependent by _Travel
+authorization dependent by _Travel
+//etag master <field_name>
+{
+  update;
+  delete;
+
+  association _Travel;
+  association _Booking;
+
+   field (numbering : managed, readonly ) BookSupplUUIS;
+
+   field ( readonly ) TravelUUID, BookingUUID;
+}
