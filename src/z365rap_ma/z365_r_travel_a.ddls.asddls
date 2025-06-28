@@ -13,7 +13,6 @@ define root view entity Z365_r_TRAVEL_A
 
 {
   key travel_uuid           as TravelUUID,
-
       travel_id             as TravelID,
       agency_id             as AgencyID,
       customer_id           as CustomerID,

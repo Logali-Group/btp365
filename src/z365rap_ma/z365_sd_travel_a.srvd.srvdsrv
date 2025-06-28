@@ -1,0 +1,6 @@
+@EndUserText.label: 'Travel'
+define service Z365_SD_TRAVEL_A {
+  expose Z365_c_TRAVEL_A  as Travel;
+  expose Z365_C_BOOKING_A as Booking;
+  expose Z365_C_BKSUPPL_A as BookingSupplement;
+}
