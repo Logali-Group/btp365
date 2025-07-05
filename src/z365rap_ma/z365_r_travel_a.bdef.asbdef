@@ -174,11 +174,9 @@ etag master LocalLastChangedAt
   determination setBookSupplNumber on modify { create; }
   determination calculateTotalPrice on modify { create; field Price, CurrencyCode; }
 
-
   validation validateSupplement on save { create; field SupplementID; }
   validation validateCurrency on save { create; field CurrencyCode; }
   validation validatePrice on save { create; field Price; }
-
 
   determine action validateSupplementPrice { validation validateSupplement; }
 

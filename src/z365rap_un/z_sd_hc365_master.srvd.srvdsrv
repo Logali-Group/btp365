@@ -1,0 +1,4 @@
+@EndUserText.label: 'HCM'
+define service Z_SD_HC365_MASTER {
+  expose Z_C_HC365_MASTER as HCMMaster;
+}

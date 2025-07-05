@@ -33,6 +33,20 @@ class lhc_BookingSupplement implementation.
   endmethod.
 
   method calculateTotalPrice.
+
+    " Parent UUIDs
+    read entities of Z365_r_TRAVEL_A in local mode
+         entity BookingSupplement by \_Travel
+         fields ( TravelUUID  )
+         with corresponding #(  keys  )
+         result data(travels).
+
+    " Trigger Travel Internal Action
+    modify entities of Z365_r_TRAVEL_A in local mode
+      entity Travel
+        execute reCalcTotalPrice
+          from corresponding  #( travels ).
+
   endmethod.
 
   method setBookSupplNumber.

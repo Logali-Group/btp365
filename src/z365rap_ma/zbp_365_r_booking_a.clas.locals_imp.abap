@@ -42,6 +42,21 @@ class lhc_Booking implementation.
   endmethod.
 
   method calculateTotalPrice.
+
+    " Read parent UUID
+    read entities of Z365_r_TRAVEL_A in local mode
+         entity Booking by \_Travel
+         fields ( TravelUUID  )
+         with corresponding #(  keys  )
+         result data(travels).
+
+    " Trigger Parent Internal Action
+    modify entities of Z365_r_TRAVEL_A in local mode
+           entity Travel
+           execute reCalcTotalPrice
+           from corresponding  #( travels ).
+
+
   endmethod.
 
   method setBookingDate.
@@ -90,19 +105,19 @@ class lhc_Booking implementation.
 
   endmethod.
 
-    method validateConnection.
-    endmethod.
+  method validateConnection.
+  endmethod.
 
-    method validateCurrency.
-    endmethod.
+  method validateCurrency.
+  endmethod.
 
-    method validateCustomer.
-    endmethod.
+  method validateCustomer.
+  endmethod.
 
-    method validateFlightPrice.
-    endmethod.
+  method validateFlightPrice.
+  endmethod.
 
-    method validateStatus.
-    endmethod.
+  method validateStatus.
+  endmethod.
 
 endclass.
